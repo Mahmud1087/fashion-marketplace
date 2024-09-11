@@ -75,7 +75,7 @@ const Navbar = () => {
         </section>
       </nav>
 
-      <div className='bg-[#272343]'>
+      <div className='bg-[#272343] block sm:hidden'>
         <MaxWidthWrapper className='py-3 flex justify-between items-center'>
           <SearchField className='block sm:hidden' />
           <section className='flex gap-3'>
