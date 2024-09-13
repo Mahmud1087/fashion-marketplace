@@ -6,7 +6,7 @@ import shield from '~/public/shield.png';
 import clock from '~/public/24-hours.png';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+// import { ArrowRight } from 'lucide-react';
 
 const benefits = [
   {
