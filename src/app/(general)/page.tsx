@@ -36,7 +36,7 @@ const Home = () => {
     <div className='overflow-hidden'>
       {/* <Hero /> */}
 
-      <section className='relative w-screen py-32 flex items-center justify-center flex-col bg-slate-50 shadow-lg'>
+      <section className='relative w-screen pt-32 pb-56 flex items-center justify-center flex-col bg-slate-50 shadow-lg'>
         <p className='text-center text-sm text-orange-700 mb-3 font-medium'>
           WELCOME TO FASHMALL
         </p>
