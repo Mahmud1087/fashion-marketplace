@@ -20,23 +20,30 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { registerFormRequired } from '@/lib/schema';
+import { registerFormSchema } from '@/lib/schema';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { Separator } from '@radix-ui/react-separator';
+import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { useState } from 'react';
 
 const RegisterPage = () => {
-  const form = useForm<z.infer<typeof registerFormRequired>>({
-    resolver: zodResolver(registerFormRequired),
+  const [password, setPassword] = useState(false);
+  const [cpassword, setCPassword] = useState(false);
+
+  const form = useForm<z.infer<typeof registerFormSchema>>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
+      fullName: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerFormRequired>) {
+  function onSubmit(values: z.infer<typeof registerFormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
@@ -62,22 +69,41 @@ const RegisterPage = () => {
               </BreadcrumbPage>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className='mt-3 text-2xl font-medium'>Register</h1>
+          <section className='text-center mt-12'>
+            <h1 className='text-2xl font-medium'>Sign Up</h1>
+            <p className='text-gray-500 mt-1'>
+              Create an account to get access to our amazing an endless features
+            </p>
+          </section>
         </header>
 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='space-y-5 mt-10 w-full sm:w-3/5 lg:w-2/5 p-10 mx-auto shadow-lg border rounded-lg'
+            className='space-y-5 mt-24 w-full sm:w-3/5 lg:w-2/5 p-10 mx-auto shadow-lg border rounded-lg sm:mt-16'
           >
+            <FormField
+              control={form.control}
+              name='fullName'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='text-black'>Full Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} type='text' />
+                  </FormControl>
+                  <FormMessage className='text-xs' />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name='email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className='text-black'>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} type='email' />
                   </FormControl>
                   <FormMessage className='text-xs' />
                 </FormItem>
@@ -89,27 +115,57 @@ const RegisterPage = () => {
               name='password'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className='text-black'>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <div className='relative'>
+                      <Input {...field} type={password ? 'text' : 'password'} />
+                      <button
+                        type='button'
+                        className='absolute right-3 top-1/2 -translate-y-1/2 h-full text-gray-600'
+                        onClick={() => setPassword(!password)}
+                      >
+                        {password ? (
+                          <EyeOpenIcon width={21} />
+                        ) : (
+                          <EyeClosedIcon width={21} />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage className='text-xs' />
                 </FormItem>
               )}
             />
-            {/* <FormField
+
+            <FormField
               control={form.control}
               name='confirmPassword'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel className='text-black'>Confirm Password</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <div className='relative'>
+                      <Input
+                        {...field}
+                        type={cpassword ? 'text' : 'password'}
+                      />
+                      <button
+                        type='button'
+                        className='absolute right-3 top-1/2 -translate-y-1/2 h-full text-gray-600'
+                        onClick={() => setCPassword(!cpassword)}
+                      >
+                        {cpassword ? (
+                          <EyeOpenIcon width={21} />
+                        ) : (
+                          <EyeClosedIcon width={21} />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage className='text-xs' />
                 </FormItem>
               )}
-            /> */}
+            />
             <Button type='submit' className='w-full'>
               Sign Up
             </Button>
@@ -119,10 +175,28 @@ const RegisterPage = () => {
                 Sign In
               </Link>
             </p>
-            <aside className='flex items-center gap-5'>
-              <Separator className='border w-full' />
+            <aside className='flex flex-col items-center gap-5'>
+              {/* <aside className='flex items-center gap-5'> */}
+              {/* <Separator className='border w-full' />
               <span>or</span>
-              <Separator className='border w-full' />
+              <Separator className='border w-full' /> */}
+              <Separator className='mt-5 border w-full' />
+              <p className='text-center text-gray-500'>
+                By continuing, you agree to our{' '}
+                <Link href='' className='text-blue-500'>
+                  Terms and Conditions
+                </Link>
+                .
+              </p>
+              <Button
+                variant='outline'
+                className='flex items-center gap-2 text-[13px]'
+              >
+                Need help
+                <span className='border border-primary rounded-full h-5 w-5 flex items-center justify-center'>
+                  ?
+                </span>
+              </Button>
             </aside>
           </form>
         </Form>

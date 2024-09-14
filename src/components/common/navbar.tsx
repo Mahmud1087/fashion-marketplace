@@ -31,7 +31,7 @@ const Navbar = () => {
               variant='ghost'
               className='flex items-center gap-2 text-[13px]'
             >
-              <span className='border border-green-500 rounded-full h-5 w-5 flex items-center justify-center'>
+              <span className='border border-primary rounded-full h-5 w-5 flex items-center justify-center'>
                 ?
               </span>
               Need help
