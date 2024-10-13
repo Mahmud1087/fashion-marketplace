@@ -67,3 +67,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.irregular-shape {
+  width: 500px;
+  height: 500px;
+  border-radius: 38% 62% 83% 17% / 38% 48% 52% 62%;
+}
