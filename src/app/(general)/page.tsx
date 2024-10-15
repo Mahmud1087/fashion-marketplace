@@ -5,12 +5,20 @@ import truck from '~/public/delivery-truck.png';
 import shield from '~/public/shield.png';
 import clock from '~/public/24-hours.png';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import menCategory from '~/public/men-category.png';
 import womenCategory from '~/public/women-category.png';
 import kidsCategory from '~/public/kids-category.png';
 import heroImg from '~/public/heroimg1.png';
-// import { ArrowRight } from 'lucide-react';
+import { Dancing_Script } from 'next/font/google';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+
+const dancingScript = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
 
 const benefits = [
   {
@@ -50,7 +58,7 @@ const Home = () => {
               Discover Fashion That <br />
               <span className='text-primary'> Defines You</span>
             </h1>
-            <p className='text-base text-gray-500 text-center sm:text-start mb-10 w-full mx-auto sm:mx-0 sm:px-0 sm:w-3/5 lg:w-1/2 px-5'>
+            <p className='text-base text-gray-500 text-center sm:text-start mb-10 w-full mx-auto sm:mx-0 sm:px-0 sm:w-2/5 lg:w-1/2 px-5'>
               Shop the latest trends, find unique pieces, and support
               independent sellers—all in one place. Join the marketplace where
               fashion meets convenience.
@@ -96,12 +104,24 @@ const Home = () => {
         })}
       </MaxWidthWrapper>
 
-      <MaxWidthWrapper className='my-44'>
-        <section className='grid gap-6 sm:grid-cols-4'>
-          <div className='w-full h-72 bg-black/20 rounded-xl relative transition-all group'>
-            {/* <h1 className='absolute -left-3 top-1/2 -translate-y-1/2 -rotate-90 text-4xl text-primary cursor-pointer group-hover:rotate-0 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all'>
+      <section className='px-10 sm:px-16 my-32 lg:px-44'>
+        <div className='flex items-center mb-10'>
+          <hr className='border border-black w-[20%] sm:w-[40%] mx-auto' />
+          <h1
+            className={cn(
+              'text-4xl font-bold w-3/5 lg:w-[25%] text-center',
+              dancingScript.className
+            )}
+          >
+            Top Categories
+          </h1>
+          <hr className='border border-black w-[20%] sm:w-[40%] mx-auto' />
+        </div>
+        <section className='grid gap-6 sm:gap-3 sm:grid-cols-3 lg:gap-6'>
+          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
+            <div className='absolute top-0 left-0 px-5 py-2 bg-teal-700 text-white '>
               Men
-            </h1> */}
+            </div>
             <div className='w-full h-full'>
               <Image
                 src={menCategory}
@@ -109,34 +129,75 @@ const Home = () => {
                 className='w-full h-full'
               />
             </div>
+            <Link
+              href=''
+              className={buttonVariants({
+                className:
+                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
+              })}
+            >
+              <span>SHOP</span>
+              <ArrowRight
+                size={15}
+                strokeWidth={3}
+                className='group-hover:translate-x-1 transition-all text-primary'
+              />
+            </Link>
           </div>
-          <div className='w-full h-72 bg-black/20 rounded-xl relative transition-all group'>
-            {/* <h1 className='absolute -left-3 top-1/2 -translate-y-1/2 -rotate-90 text-4xl text-primary cursor-pointer group-hover:rotate-0 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all'>
+          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
+            <div className='absolute top-0 left-0 px-5 py-2 bg-rose-800 text-white '>
               Women
-            </h1> */}
+            </div>
             <div className='w-full h-full'>
               <Image
                 src={womenCategory}
-                alt='man image'
+                alt='woman image'
                 className='w-full h-full'
               />
             </div>
+            <Link
+              href=''
+              className={buttonVariants({
+                className:
+                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
+              })}
+            >
+              <span>SHOP</span>
+              <ArrowRight
+                size={15}
+                strokeWidth={3}
+                className='group-hover:translate-x-1 transition-all text-primary'
+              />
+            </Link>
           </div>
-          <div className='w-full h-72 bg-black/20 rounded-xl relative transition-all group'>
-            {/* <h1 className='absolute -left-3 top-1/2 -translate-y-1/2 -rotate-90 text-4xl text-primary cursor-pointer group-hover:rotate-0 group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all'>
+          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
+            <div className='absolute top-0 left-0 px-5 py-2 bg-[#272343] text-white '>
               Kids
-            </h1> */}
+            </div>
             <div className='w-full h-full'>
               <Image
                 src={kidsCategory}
-                alt='man image'
+                alt='kid image'
                 className='w-full h-full'
               />
             </div>
+            <Link
+              href=''
+              className={buttonVariants({
+                className:
+                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
+              })}
+            >
+              <span>SHOP</span>
+              <ArrowRight
+                size={15}
+                strokeWidth={3}
+                className='group-hover:translate-x-1 transition-all text-primary'
+              />
+            </Link>
           </div>
-          <div className='w-full h-56'>Top Categories</div>
         </section>
-      </MaxWidthWrapper>
+      </section>
     </div>
   );
 };
