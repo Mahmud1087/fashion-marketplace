@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Heart, ShoppingCart, User } from 'lucide-react';
+import { Check, Heart, User } from 'lucide-react';
 import { Button, buttonVariants } from '../ui/button';
 import Logo from './logo';
 import Navlinks from './navlinks';
@@ -8,10 +8,9 @@ import Link from 'next/link';
 import Sidebar from './sidebar';
 import SearchField from './search-products';
 import MaxWidthWrapper from './max-width-wrapper';
+import Cart from './cart';
 
 const Navbar = () => {
-  const cartItemCount = 0;
-
   return (
     <>
       <header className='bg-[#272343] py-3 text-[13px] text-gray-300 font-medium hidden sm:block'>
@@ -48,13 +47,7 @@ const Navbar = () => {
             <SearchField className='hidden sm:block' />
 
             <div className='flex gap-4 items-center'>
-              <Button variant='secondary' className='flex gap-2 items-center'>
-                <ShoppingCart size={18} />
-                <span className='hidden sm:block'>Cart</span>
-                <span className='text-white bg-primary rounded-full h-5 w-5 text-xs flex items-center justify-center'>
-                  {cartItemCount}
-                </span>
-              </Button>
+              <Cart />
 
               <Sidebar />
 
