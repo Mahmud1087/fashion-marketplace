@@ -92,12 +92,9 @@ const Home = () => {
             </div>
             <Link
               href=''
-              className={buttonVariants({
-                className:
-                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
-              })}
+              className='absolute bottom-16 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/95 hover:bg-black flex items-center rounded-lg gap-4 text-white group'
             >
-              <span>SHOP</span>
+              <span className='font-medium'>SHOP</span>
               <ArrowRight
                 size={15}
                 strokeWidth={3}
@@ -118,12 +115,9 @@ const Home = () => {
             </div>
             <Link
               href=''
-              className={buttonVariants({
-                className:
-                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
-              })}
+              className='absolute bottom-16 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/95 hover:bg-black flex items-center rounded-lg gap-4 text-white group'
             >
-              <span>SHOP</span>
+              <span className='font-medium'>SHOP</span>
               <ArrowRight
                 size={15}
                 strokeWidth={3}
@@ -144,12 +138,9 @@ const Home = () => {
             </div>
             <Link
               href=''
-              className={buttonVariants({
-                className:
-                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
-              })}
+              className='absolute bottom-16 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/95 hover:bg-black flex items-center rounded-lg gap-4 text-white group'
             >
-              <span>SHOP</span>
+              <span className='font-medium'>SHOP</span>
               <ArrowRight
                 size={15}
                 strokeWidth={3}
