@@ -54,10 +54,6 @@ import truck from '~/public/delivery-truck.png';
 import shield from '~/public/shield.png';
 import clock from '~/public/24-hours.png';
 
-import menCategory from '~/public/men-category.png';
-import womenCategory from '~/public/women-category.png';
-import kidsCategory from '~/public/kids-category.png';
-
 export const benefits = [
   {
     img: box,
@@ -79,12 +75,6 @@ export const benefits = [
     title: 'Secure Payment',
     description: '100% Secure Payment Method',
   },
-];
-
-export const topCategories = [
-  { title: 'Men', src: menCategory, titleBg: 'bg-teal-700' },
-  { title: 'Women', src: womenCategory, titleBg: 'bg-rose-800' },
-  { title: 'Kids', src: kidsCategory, titleBg: 'bg-[#272343]' },
 ];
 
 export const products = [

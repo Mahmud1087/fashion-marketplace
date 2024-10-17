@@ -4,12 +4,14 @@ import Image from 'next/image';
 import { Button, buttonVariants } from '@/components/ui/button';
 
 import heroImg from '~/public/heroimg1.png';
+import menCategory from '~/public/men-category.png';
+import womenCategory from '~/public/women-category.png';
+import kidsCategory from '~/public/kids-category.png';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import Heading from '@/components/common/heading';
-import { benefits, products, topCategories } from '@/lib/data';
+import { benefits, products } from '@/lib/data';
 import ListedProducts from '@/components/common/listedProducts';
-import { cn } from '@/lib/utils';
 
 const featuredProducts = products.filter((product) => product.isFeatured);
 const newProducts = products.filter((product) => product.isNew);
@@ -47,7 +49,7 @@ const Home = () => {
           </aside>
           <div className='hidden absolute irregular-shape right-0 top-5 bg-black/25 sm:block'></div>
           <div className='absolute right-0 top-0 hidden sm:block'>
-            <Image src={heroImg} priority alt='hero image' />
+            <Image src={heroImg} alt='hero image' />
           </div>
         </MaxWidthWrapper>
       </section>
@@ -77,44 +79,84 @@ const Home = () => {
       <section className='px-10 sm:px-16 my-32 lg:px-44'>
         <Heading title='Top Categories' />
         <section className='grid gap-6 sm:gap-3 sm:grid-cols-3 lg:gap-6'>
-          {topCategories.map((category) => {
-            return (
-              <div
-                key={category.title}
-                className='w-full h-[25rem] bg-black/20 relative transition-all'
-              >
-                <div
-                  className={cn(
-                    'absolute top-0 left-0 px-5 py-2 text-white',
-                    category.titleBg
-                  )}
-                >
-                  {category.title}
-                </div>
-                <div className='w-full h-full'>
-                  <Image
-                    src={category.src}
-                    alt='man image'
-                    className='w-full h-full'
-                  />
-                </div>
-                <Link
-                  href=''
-                  className={buttonVariants({
-                    className:
-                      'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
-                  })}
-                >
-                  <span>SHOP</span>
-                  <ArrowRight
-                    size={15}
-                    strokeWidth={3}
-                    className='group-hover:translate-x-1 transition-all text-primary'
-                  />
-                </Link>
-              </div>
-            );
-          })}
+          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
+            <div className='absolute top-0 left-0 px-5 py-2 bg-teal-700 text-white '>
+              Men
+            </div>
+            <div className='w-full h-full'>
+              <Image
+                src={menCategory}
+                alt='man image'
+                className='w-full h-full'
+              />
+            </div>
+            <Link
+              href=''
+              className={buttonVariants({
+                className:
+                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
+              })}
+            >
+              <span>SHOP</span>
+              <ArrowRight
+                size={15}
+                strokeWidth={3}
+                className='group-hover:translate-x-1 transition-all text-primary'
+              />
+            </Link>
+          </div>
+          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
+            <div className='absolute top-0 left-0 px-5 py-2 bg-rose-800 text-white '>
+              Women
+            </div>
+            <div className='w-full h-full'>
+              <Image
+                src={womenCategory}
+                alt='woman image'
+                className='w-full h-full'
+              />
+            </div>
+            <Link
+              href=''
+              className={buttonVariants({
+                className:
+                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
+              })}
+            >
+              <span>SHOP</span>
+              <ArrowRight
+                size={15}
+                strokeWidth={3}
+                className='group-hover:translate-x-1 transition-all text-primary'
+              />
+            </Link>
+          </div>
+          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
+            <div className='absolute top-0 left-0 px-5 py-2 bg-[#272343] text-white '>
+              Kids
+            </div>
+            <div className='w-full h-full'>
+              <Image
+                src={kidsCategory}
+                alt='kid image'
+                className='w-full h-full'
+              />
+            </div>
+            <Link
+              href=''
+              className={buttonVariants({
+                className:
+                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
+              })}
+            >
+              <span>SHOP</span>
+              <ArrowRight
+                size={15}
+                strokeWidth={3}
+                className='group-hover:translate-x-1 transition-all text-primary'
+              />
+            </Link>
+          </div>
         </section>
       </section>
 
