@@ -162,7 +162,7 @@ const Home = () => {
 
       <MaxWidthWrapper className='my-32'>
         <Heading title='Featured Products' />
-        <ListedProducts products={featuredProducts} />
+        <ListedProducts isFeatured={true} products={featuredProducts} />
       </MaxWidthWrapper>
 
       <MaxWidthWrapper className='my-32'>
