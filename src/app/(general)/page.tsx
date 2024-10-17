@@ -1,53 +1,23 @@
-// import Hero from '@/components/common/hero';
 import MaxWidthWrapper from '@/components/common/max-width-wrapper';
-import box from '~/public/box.png';
-import truck from '~/public/delivery-truck.png';
-import shield from '~/public/shield.png';
-import clock from '~/public/24-hours.png';
+
 import Image from 'next/image';
 import { Button, buttonVariants } from '@/components/ui/button';
-import menCategory from '~/public/men-category.png';
-import womenCategory from '~/public/women-category.png';
-import kidsCategory from '~/public/kids-category.png';
+
 import heroImg from '~/public/heroimg1.png';
-import { Dancing_Script } from 'next/font/google';
-import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import Heading from '@/components/common/heading';
+import { benefits, products, topCategories } from '@/lib/data';
+import ListedProducts from '@/components/common/listedProducts';
+import { cn } from '@/lib/utils';
 
-const dancingScript = Dancing_Script({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const benefits = [
-  {
-    img: box,
-    title: 'Discount',
-    description: 'Every week now on sale',
-  },
-  {
-    img: truck,
-    title: 'Free Delivery',
-    description: '100% Free for all orders',
-  },
-  {
-    img: clock,
-    title: 'Great Support 24/7',
-    description: 'Support always available',
-  },
-  {
-    img: shield,
-    title: 'Secure Payment',
-    description: '100% Secure Payment Method',
-  },
-];
+const featuredProducts = products.filter((product) => product.isFeatured);
+const newProducts = products.filter((product) => product.isNew);
+const discountedProducts = products.filter((product) => product.isDiscounted);
 
 const Home = () => {
   return (
     <div className='overflow-hidden'>
-      {/* <Hero /> */}
-
       <section className='bg-slate-100 shadow-lg'>
         <MaxWidthWrapper className='relative w-screen pt-32 pb-56  flex items-center'>
           <aside className='flex items-center justify-center flex-col sm:items-start'>
@@ -77,7 +47,7 @@ const Home = () => {
           </aside>
           <div className='hidden absolute irregular-shape right-0 top-5 bg-black/25 sm:block'></div>
           <div className='absolute right-0 top-0 hidden sm:block'>
-            <Image src={heroImg} alt='hero image' />
+            <Image src={heroImg} priority alt='hero image' />
           </div>
         </MaxWidthWrapper>
       </section>
@@ -105,99 +75,63 @@ const Home = () => {
       </MaxWidthWrapper>
 
       <section className='px-10 sm:px-16 my-32 lg:px-44'>
-        <div className='flex items-center mb-10'>
-          <hr className='border border-black w-[20%] sm:w-[40%] mx-auto' />
-          <h1
-            className={cn(
-              'text-4xl font-bold w-3/5 lg:w-[25%] text-center',
-              dancingScript.className
-            )}
-          >
-            Top Categories
-          </h1>
-          <hr className='border border-black w-[20%] sm:w-[40%] mx-auto' />
-        </div>
+        <Heading title='Top Categories' />
         <section className='grid gap-6 sm:gap-3 sm:grid-cols-3 lg:gap-6'>
-          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
-            <div className='absolute top-0 left-0 px-5 py-2 bg-teal-700 text-white '>
-              Men
-            </div>
-            <div className='w-full h-full'>
-              <Image
-                src={menCategory}
-                alt='man image'
-                className='w-full h-full'
-              />
-            </div>
-            <Link
-              href=''
-              className={buttonVariants({
-                className:
-                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
-              })}
-            >
-              <span>SHOP</span>
-              <ArrowRight
-                size={15}
-                strokeWidth={3}
-                className='group-hover:translate-x-1 transition-all text-primary'
-              />
-            </Link>
-          </div>
-          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
-            <div className='absolute top-0 left-0 px-5 py-2 bg-rose-800 text-white '>
-              Women
-            </div>
-            <div className='w-full h-full'>
-              <Image
-                src={womenCategory}
-                alt='woman image'
-                className='w-full h-full'
-              />
-            </div>
-            <Link
-              href=''
-              className={buttonVariants({
-                className:
-                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
-              })}
-            >
-              <span>SHOP</span>
-              <ArrowRight
-                size={15}
-                strokeWidth={3}
-                className='group-hover:translate-x-1 transition-all text-primary'
-              />
-            </Link>
-          </div>
-          <div className='w-full h-[25rem] bg-black/20 relative transition-all'>
-            <div className='absolute top-0 left-0 px-5 py-2 bg-[#272343] text-white '>
-              Kids
-            </div>
-            <div className='w-full h-full'>
-              <Image
-                src={kidsCategory}
-                alt='kid image'
-                className='w-full h-full'
-              />
-            </div>
-            <Link
-              href=''
-              className={buttonVariants({
-                className:
-                  'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
-              })}
-            >
-              <span>SHOP</span>
-              <ArrowRight
-                size={15}
-                strokeWidth={3}
-                className='group-hover:translate-x-1 transition-all text-primary'
-              />
-            </Link>
-          </div>
+          {topCategories.map((category) => {
+            return (
+              <div
+                key={category.title}
+                className='w-full h-[25rem] bg-black/20 relative transition-all'
+              >
+                <div
+                  className={cn(
+                    'absolute top-0 left-0 px-5 py-2 text-white',
+                    category.titleBg
+                  )}
+                >
+                  {category.title}
+                </div>
+                <div className='w-full h-full'>
+                  <Image
+                    src={category.src}
+                    alt='man image'
+                    className='w-full h-full'
+                  />
+                </div>
+                <Link
+                  href=''
+                  className={buttonVariants({
+                    className:
+                      'absolute bottom-16 left-1/2 -translate-x-1/2 px-6 bg-black/95 hover:bg-black flex gap-3 group',
+                  })}
+                >
+                  <span>SHOP</span>
+                  <ArrowRight
+                    size={15}
+                    strokeWidth={3}
+                    className='group-hover:translate-x-1 transition-all text-primary'
+                  />
+                </Link>
+              </div>
+            );
+          })}
         </section>
       </section>
+
+      <MaxWidthWrapper className='my-32'>
+        <Heading title='Featured Products' />
+        <ListedProducts products={featuredProducts} />
+      </MaxWidthWrapper>
+
+      <MaxWidthWrapper className='my-32'>
+        <Heading title='New Products' />
+        <ListedProducts products={newProducts} />
+      </MaxWidthWrapper>
+
+      <MaxWidthWrapper className='my-32'>
+        <Heading title='Discounted Products' />
+        <ListedProducts products={discountedProducts} />
+      </MaxWidthWrapper>
     </div>
   );
 };
