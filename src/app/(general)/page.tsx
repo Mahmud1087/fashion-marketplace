@@ -1,7 +1,7 @@
 import MaxWidthWrapper from '@/components/common/max-width-wrapper';
 
 import Image from 'next/image';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 
 import heroImg from '~/public/heroimg1.png';
 import menCategory from '~/public/men-category.png';
