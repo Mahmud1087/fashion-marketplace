@@ -73,3 +73,30 @@
   height: 500px;
   border-radius: 38% 62% 83% 17% / 38% 48% 52% 62%;
 }
+
+/* Custom scrollbar */
+.cart-scrollbar::-webkit-scrollbar {
+  opacity: 0;
+  width: 5px;
+}
+
+.cart-scrollbar:hover::-webkit-scrollbar {
+  opacity: 1;
+  width: 5px;
+}
+
+/* Track */
+.cart-scrollbar::-webkit-scrollbar-track {
+  background: #e2e2e2;
+  border-radius: 5px;
+}
+
+/* Handle */
+.cart-scrollbar::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 5px;
+}
+
+.cart-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: #633cff;
+}

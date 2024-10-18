@@ -8,10 +8,10 @@ type CartState = {
 };
 
 type CartActions = {
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, productId: number | string) => void;
   removeFromCart: (productId: number | string) => void;
-  incQty: (producId: number | string) => void;
-  decQty: (producId: number | string) => void;
+  incQty: (productId: number | string) => void;
+  decQty: (productId: number | string) => void;
   getProductById: (productId: number | string) => CartProduct | undefined;
   setTotal: (total: number) => void;
   reset: () => void;
@@ -50,9 +50,16 @@ export const createCartSlice: StateCreator<
         else foundProduct.qty -= 1;
       }
     }),
-  addToCart: (product) =>
+  addToCart: (product, productId) =>
     set((state) => {
-      state.cartProducts.push({ ...product, qty: 1 });
+      const foundIndex = state.cartProducts.find(
+        (product) => product.id === productId
+      );
+      if (foundIndex) {
+        return state.cartProducts;
+      } else {
+        state.cartProducts.push({ ...product, qty: 1 });
+      }
     }),
   removeFromCart: (productId) =>
     set((state) => {

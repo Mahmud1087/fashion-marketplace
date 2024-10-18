@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Carousel,
   CarouselContent,
@@ -10,6 +12,7 @@ import { Button } from '../ui/button';
 import { cn, USD } from '@/lib/utils';
 import { products } from '@/lib/data';
 import Link from 'next/link';
+import { useStore } from '@/store/store';
 
 type Product = (typeof products)[number];
 
@@ -19,6 +22,8 @@ interface ListedProductsProperties {
 }
 
 const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
+  const addToCart = useStore((state) => state.addToCart);
+
   return (
     <Carousel className='w-full '>
       <CarouselContent className='-ml-3 pr-12 sm:-ml-4 sm:pr-32 lg:-ml-3 lg:pr-12'>
@@ -47,45 +52,57 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
               </article>
 
               <section className='flex flex-col aspect-square items-center justify-center w-full'>
-                <Link
-                  href={`/${product.name}`}
-                  className='h-72 w-full rounded-t-lg shadow relative overflow-hidden group'
-                >
+                <section className='h-[22.5rem] w-full rounded-t-lg shadow relative overflow-hidden group sm:h-80 lg:h-72'>
                   <Image
                     src={product.img}
                     alt={`Image of ${product.name}`}
                     className='w-full h-full rounded-t-lg'
                   />
-                  <aside className='absolute top-0 left-0 w-full h-full cursor-pointer bg-black/50 opacity-0 transition-all flex items-center justify-center text-white/85 text-lg group-hover:opacity-100'>
-                    View Details
-                  </aside>
-                </Link>
+                  <Link
+                    href={`/${product.name}`}
+                    className='absolute top-0 left-0 w-full h-full cursor-pointer bg-black/60 opacity-0 transition-all items-center justify-center text-white text-lg group-hover:opacity-100 hidden lg:flex'
+                  >
+                    View Product details
+                  </Link>
+                </section>
                 <div className='shadow rounded-lg border-t-0 w-full pb-4 pt-2 px-4 flex flex-col gap-2'>
-                  <p className='font-medium text-lg'>
+                  <p className='font-medium text-xl lg:text-lg'>
                     {product.name.length > 20
                       ? `${product.name.slice(0, 20)}...`
                       : product.name}
                   </p>
-                  <aside className='flex gap-4'>
-                    <p
-                      className={cn(
-                        'font-medium',
-                        product.isDiscounted &&
-                          'line-through decoration-red-600 text-black/60'
+                  <div className='flex justify-between items-center'>
+                    <aside className='flex gap-2 text-lg lg:text-base'>
+                      {product.isDiscounted && (
+                        <p className='font-medium '>
+                          {USD(
+                            (product.price *
+                              (100 - product.discountPercentage)) /
+                              100
+                          )}
+                        </p>
                       )}
-                    >
-                      {USD(product.price)}
-                    </p>
-                    {product.isDiscounted && (
-                      <p className='font-medium '>
-                        {USD(
-                          (product.price * (100 - product.discountPercentage)) /
-                            100
+                      <p
+                        className={cn(
+                          'font-medium text-lg lg:text-base',
+                          product.isDiscounted &&
+                            'line-through decoration-red-600 text-black/60 text-base lg:text-sm'
                         )}
+                      >
+                        {USD(product.price)}
                       </p>
-                    )}
-                  </aside>
-                  <Button>Add to cart</Button>
+                    </aside>
+
+                    <Link
+                      href={`/${product.name}`}
+                      className='block px-2 py-1 rounded-md border shadow font-medium lg:hidden'
+                    >
+                      View Product
+                    </Link>
+                  </div>
+                  <Button onClick={() => addToCart(product, product.id)}>
+                    Add to cart
+                  </Button>
                 </div>
               </section>
             </div>

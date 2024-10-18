@@ -157,12 +157,12 @@ const Home = () => {
       </MaxWidthWrapper>
 
       <MaxWidthWrapper className='my-32'>
-        <Heading title='New Products' />
+        <Heading title='New Arrivals' />
         <ListedProducts products={newProducts} />
       </MaxWidthWrapper>
 
       <MaxWidthWrapper className='my-32'>
-        <Heading title='Discounted Products' />
+        <Heading title='Bonus Sales' />
         <ListedProducts products={discountedProducts} />
       </MaxWidthWrapper>
     </div>

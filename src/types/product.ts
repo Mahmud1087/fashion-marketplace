@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export type Product = {
   id: number | string;
   name: string;
@@ -8,7 +10,7 @@ export type Product = {
   isNew: boolean;
   isDiscounted: boolean;
   isBestSeller: boolean;
-  discountedPercentage: number;
+  discountPercentage: number;
   releaseDate: string;
-  img: string;
+  img: StaticImageData;
 };
