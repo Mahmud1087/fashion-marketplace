@@ -73,7 +73,7 @@ const Cart = () => {
                       className='flex items-center justify-between py-4 first:pt-2 border-b'
                     >
                       <div className='flex items-center gap-5'>
-                        <aside className='h-16 w-16'>
+                        <aside className='h-16 w-16 sm:h-16 sm:w-16'>
                           <Image
                             src={product.img}
                             alt='Product image'
@@ -81,14 +81,21 @@ const Cart = () => {
                           />
                         </aside>
                         <aside className='flex flex-col gap-2'>
-                          <h1 className='text-lg font-medium lg:text-base'>
-                            {product.name}
+                          <h1 className='font-medium text-base'>
+                            {product.name.length > 10
+                              ? `${product.name.slice(0, 10)}...`
+                              : product.name}
                           </h1>
+                          <p className='block font-medium sm:hidden'>
+                            {USD(product.price)}
+                          </p>
                           <ChangeQtyButtons productId={product.id} />
                         </aside>
                       </div>
                       <div className='flex items-center gap-6'>
-                        <p className='font-medium'>{USD(product.price)}</p>
+                        <p className='hidden font-medium sm:block'>
+                          {USD(product.price)}
+                        </p>
                         <Button
                           variant='ghost'
                           onClick={() => {
