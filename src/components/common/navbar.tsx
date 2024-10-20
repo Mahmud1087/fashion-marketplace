@@ -14,15 +14,14 @@ import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const { ref, inView } = useInView({
-    // rootMargin: '0px',
-    // threshold: 1.0,
+    threshold: 1.0,
   });
 
   return (
     <>
       <header className='bg-[#272343] py-3 text-[13px] text-gray-300 font-medium hidden sm:block'>
         <div className='h-full w-[90%] mx-auto hidden justify-between items-center sm:w-4/5 sm:flex'>
-          <h1 className=' items-center gap-1 hidden lg:flex'>
+          <h1 className='items-center gap-1 hidden lg:flex'>
             <Check className='text-green-500' size={20} />
             <span>Your number one fashion marketplace</span>
           </h1>
@@ -46,11 +45,16 @@ const Navbar = () => {
         </div>
       </header>
 
+      <div ref={ref} className=''></div>
+
       <nav
-        ref={ref}
-        className={cn('relative py-4 bg-[#9A9CAA]/50 z-50 transition-all', {
-          'fixed top-0 left-0 w-full': !inView,
-        })}
+        className={cn(
+          'h-16 flex items-center justify-center bg-[#9A9CAA]/50 transition-all duration-300 ease-in-out',
+          {
+            'sticky top-0 left-0 w-full bg-[#9A9CAA]/65 shadow-lg backdrop-blur-md z-50':
+              !inView,
+          }
+        )}
       >
         <div className='flex items-center justify-between w-[90%] mx-auto sm:w-4/5'>
           <Logo />
@@ -100,4 +104,5 @@ const Navbar = () => {
     </>
   );
 };
+
 export default Navbar;
