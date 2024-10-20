@@ -41,7 +41,7 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                 )}
                 {product.isDiscounted && (
                   <h1 className='bg-orange-400 px-3 last:rounded-tr-lg first:rounded-tl-lg py-2 text-white font-medium'>
-                    {product.discountPercentage}% OFF
+                    -{product.discountPercentage}%
                   </h1>
                 )}
                 {!product.isNew && product.isBestSeller && isFeatured && (

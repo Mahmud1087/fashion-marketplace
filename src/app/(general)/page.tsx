@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 import heroImg from '~/public/heroimg1.png';
+// import menCategory from '~/public/men-category.png';
 import menCategory from '~/public/men-category.png';
 import womenCategory from '~/public/women-category.png';
 import kidsCategory from '~/public/kids-category.png';

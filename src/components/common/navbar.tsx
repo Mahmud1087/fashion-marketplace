@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils';
 const Navbar = () => {
   const { ref, inView } = useInView({
     threshold: 1.0,
+    rootMargin: '55px',
   });
 
   return (
@@ -53,6 +54,7 @@ const Navbar = () => {
           {
             'sticky top-0 left-0 w-full bg-[#9A9CAA]/65 shadow-lg backdrop-blur-md z-50':
               !inView,
+            '-top-11': inView,
           }
         )}
       >
