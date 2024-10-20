@@ -1,5 +1,6 @@
 import { CartProduct } from '@/types/cart-product';
 import { Product } from '@/types/product';
+import { toast } from 'sonner';
 import { StateCreator } from 'zustand';
 
 type CartState = {
@@ -56,9 +57,20 @@ export const createCartSlice: StateCreator<
         (product) => product.id === productId
       );
       if (foundIndex) {
-        return state.cartProducts;
+        toast('Product already added to cart', {
+          position: 'top-center',
+          style: {
+            color: '#f44336',
+          },
+        });
       } else {
         state.cartProducts.push({ ...product, qty: 1 });
+        toast('Product added to cart', {
+          position: 'top-center',
+          style: {
+            color: 'green',
+          },
+        });
       }
     }),
   removeFromCart: (productId) =>
@@ -66,6 +78,12 @@ export const createCartSlice: StateCreator<
       state.cartProducts = state.cartProducts.filter(
         (product) => product.id !== productId
       );
+      toast('Product deleted from cart', {
+        position: 'top-right',
+        style: {
+          color: '#f44336',
+        },
+      });
     }),
   getProductById: (productId) =>
     get().cartProducts.find((product) => product.id === productId),
@@ -73,5 +91,14 @@ export const createCartSlice: StateCreator<
     set((state) => {
       state.totalPrice = totalPrice;
     }),
-  reset: () => set(() => initialState),
+  reset: () =>
+    set(() => {
+      toast('Cart cleared', {
+        position: 'top-right',
+        style: {
+          color: '#f44336',
+        },
+      });
+      return initialState;
+    }),
 });

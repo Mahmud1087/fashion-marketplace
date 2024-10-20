@@ -91,7 +91,9 @@ const Cart = () => {
                         <p className='font-medium'>{USD(product.price)}</p>
                         <Button
                           variant='ghost'
-                          onClick={() => removeFromCart(product.id)}
+                          onClick={() => {
+                            removeFromCart(product.id);
+                          }}
                         >
                           <Trash2 className='text-red-500' size={18} />
                         </Button>

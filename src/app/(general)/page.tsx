@@ -49,7 +49,7 @@ const Home = () => {
           </aside>
           <div className='hidden absolute irregular-shape right-0 top-5 bg-black/25 sm:block'></div>
           <div className='absolute right-0 top-0 hidden sm:block'>
-            <Image src={heroImg} alt='hero image' />
+            <Image priority src={heroImg} alt='hero image' />
           </div>
         </MaxWidthWrapper>
       </section>

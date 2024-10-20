@@ -9,8 +9,15 @@ import Sidebar from './sidebar';
 import SearchField from './search-products';
 import MaxWidthWrapper from './max-width-wrapper';
 import Cart from './cart';
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
 
 const Navbar = () => {
+  const { ref, inView } = useInView({
+    // rootMargin: '0px',
+    // threshold: 1.0,
+  });
+
   return (
     <>
       <header className='bg-[#272343] py-3 text-[13px] text-gray-300 font-medium hidden sm:block'>
@@ -39,33 +46,36 @@ const Navbar = () => {
         </div>
       </header>
 
-      <nav className=''>
-        <section className='py-4 bg-[#9A9CAA]/50'>
-          <div className='flex items-center justify-between w-[90%] mx-auto sm:w-4/5'>
-            <Logo />
+      <nav
+        ref={ref}
+        className={cn('relative py-4 bg-[#9A9CAA]/50 z-50 transition-all', {
+          'fixed top-0 left-0 w-full': !inView,
+        })}
+      >
+        <div className='flex items-center justify-between w-[90%] mx-auto sm:w-4/5'>
+          <Logo />
 
-            <SearchField className='hidden sm:block' />
+          <SearchField className='hidden sm:block' />
 
-            <div className='flex gap-4 items-center'>
-              <Cart />
+          <div className='flex gap-4 items-center'>
+            <Cart />
 
-              <Sidebar />
+            <Sidebar />
 
-              <Button variant='secondary' className='hidden sm:block'>
-                <Heart size={18} />
-              </Button>
-              <Link
-                href='/login'
-                className={buttonVariants({
-                  variant: 'secondary',
-                  className: 'hidden sm:block',
-                })}
-              >
-                <User size={18} />
-              </Link>
-            </div>
+            <Button variant='secondary' className='hidden sm:block'>
+              <Heart size={18} />
+            </Button>
+            <Link
+              href='/login'
+              className={buttonVariants({
+                variant: 'secondary',
+                className: 'hidden sm:block',
+              })}
+            >
+              <User size={18} />
+            </Link>
           </div>
-        </section>
+        </div>
       </nav>
 
       <div className='bg-[#272343] block sm:hidden'>

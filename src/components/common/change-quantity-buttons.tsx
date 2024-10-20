@@ -2,7 +2,6 @@
 
 import { useStore } from '@/store/store';
 import { useShallow } from 'zustand/react/shallow';
-import { Button } from '../ui/button';
 import { Minus, Plus } from 'lucide-react';
 import { useEffect } from 'react';
 

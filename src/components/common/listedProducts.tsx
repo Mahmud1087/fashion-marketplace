@@ -100,7 +100,11 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                       View Product
                     </Link>
                   </div>
-                  <Button onClick={() => addToCart(product, product.id)}>
+                  <Button
+                    onClick={() => {
+                      addToCart(product, product.id);
+                    }}
+                  >
                     Add to cart
                   </Button>
                 </div>
