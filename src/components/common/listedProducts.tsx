@@ -8,11 +8,10 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import Image from 'next/image';
-import { Button } from '../ui/button';
 import { cn, USD } from '@/lib/utils';
 import { products } from '@/lib/data';
 import Link from 'next/link';
-import { useStore } from '@/store/store';
+import AddToCartButton from './add-to-cart';
 
 type Product = (typeof products)[number];
 
@@ -22,8 +21,6 @@ interface ListedProductsProperties {
 }
 
 const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
-  const addToCart = useStore((state) => state.addToCart);
-
   return (
     <Carousel className='w-full '>
       <CarouselContent className='-ml-3 pr-12 sm:-ml-4 sm:pr-32 lg:-ml-3 lg:pr-12'>
@@ -104,13 +101,7 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                       View Product
                     </Link>
                   </div>
-                  <Button
-                    onClick={() => {
-                      addToCart(product, product.id);
-                    }}
-                  >
-                    Add to cart
-                  </Button>
+                  <AddToCartButton product={product} />
                 </div>
               </section>
             </div>

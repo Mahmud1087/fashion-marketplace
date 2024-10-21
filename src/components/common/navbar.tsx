@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 const Navbar = () => {
   const { ref, inView } = useInView({
     threshold: 1.0,
-    rootMargin: '55px',
+    rootMargin: '100px',
   });
 
   return (

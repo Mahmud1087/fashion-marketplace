@@ -13,4 +13,8 @@ export type Product = {
   discountPercentage: number;
   releaseDate: string;
   img: StaticImageData;
+  noOfReviews: number;
+  noOfStarReview: number;
+  isWishList: boolean;
+  qty: number;
 };
