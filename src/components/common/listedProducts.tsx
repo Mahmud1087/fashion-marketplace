@@ -59,20 +59,24 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                     className='w-full h-full rounded-t-lg'
                   />
                   <Link
-                    href={`/${product.name}`}
+                    href={{
+                      pathname: `/shop/${product.id}`,
+                      query: { product_name: `/${product.name}` },
+                    }}
+                    // href={`/${product.name}`}
                     className='absolute top-0 left-0 w-full h-full cursor-pointer bg-black/60 opacity-0 transition-all items-center justify-center text-white text-lg group-hover:opacity-100 hidden lg:flex'
                   >
                     View Product details
                   </Link>
                 </section>
-                <div className='shadow rounded-lg border-t-0 w-full pb-4 pt-2 px-4 flex flex-col gap-2'>
+                <div className='shadow rounded-lg border-t-0 w-full pb-4 pt-2 px-4 flex flex-col gap-4 lg:gap-2'>
                   <p className='font-medium text-xl lg:text-lg'>
                     {product.name.length > 20
                       ? `${product.name.slice(0, 20)}...`
                       : product.name}
                   </p>
                   <div className='flex justify-between items-center'>
-                    <aside className='flex gap-2 text-lg lg:text-base'>
+                    <aside className='flex gap-2 text-base lg:text-sm'>
                       {product.isDiscounted && (
                         <p className='font-medium '>
                           {USD(
@@ -84,9 +88,9 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                       )}
                       <p
                         className={cn(
-                          'font-medium text-lg lg:text-base',
+                          'font-medium text-base lg:text-sm',
                           product.isDiscounted &&
-                            'line-through decoration-red-600 text-black/60 text-base lg:text-sm'
+                            'line-through decoration-red-600 text-black/60 text-sm lg:text-xs'
                         )}
                       >
                         {USD(product.price)}
@@ -94,7 +98,7 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                     </aside>
 
                     <Link
-                      href={`/${product.name}`}
+                      href={`/shop/${product.id}`}
                       className='block px-2 py-1 rounded-md border shadow font-medium lg:hidden'
                     >
                       View Product
