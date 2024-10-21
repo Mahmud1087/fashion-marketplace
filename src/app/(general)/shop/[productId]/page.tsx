@@ -3,9 +3,9 @@
 import BackButton from '@/components/common/back-button';
 import MaxWidthWrapper from '@/components/common/max-width-wrapper';
 import { products } from '@/lib/data';
-import { useStore } from '@/store/store';
+// import { useStore } from '@/store/store';
 import Image, { StaticImageData } from 'next/image';
-import { useShallow } from 'zustand/react/shallow';
+// import { useShallow } from 'zustand/react/shallow';
 
 const SingleProductPage = ({
   params,
