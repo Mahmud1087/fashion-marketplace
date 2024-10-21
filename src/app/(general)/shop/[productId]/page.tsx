@@ -12,11 +12,11 @@ const SingleProductPage = ({
 }: {
   params: { productId: number | string };
 }) => {
-  const { getSingleProductById } = useStore(
-    useShallow((state) => ({
-      getSingleProductById: state.getSingleProductById,
-    }))
-  );
+  // const { getSingleProductById } = useStore(
+  //   useShallow((state) => ({
+  //     getSingleProductById: state.getSingleProductById,
+  //   }))
+  // );
 
   // const product = getSingleProductById(params.productId);
   const product = products.find((product) => product.id === params.productId);
