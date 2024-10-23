@@ -166,6 +166,27 @@ const Home = () => {
         <Heading title='Bonus Sales' />
         <ListedProducts products={discountedProducts} />
       </MaxWidthWrapper>
+
+      {/* newsletter section */}
+      {/* <MaxWidthWrapper className='flex mb-12'>
+        <div className='w-1/2 bg-black/65 text-white'>
+          <h1>NEWSLETTER</h1>
+          <p>
+            Sign up to our newsletter and save 20% off for your next purchase
+          </p>
+        </div>
+        <div className='w-1/2 bg-gray-200'>
+          <form action=''>
+            <input type='text' name='newsletter' id='newsletter' />
+            <Button
+              type='submit'
+              className='mt-5 bg-black text-primary-foreground rounded-none px-16 hover:bg-black/75'
+            >
+              Subscribe
+            </Button>
+          </form>
+        </div>
+      </MaxWidthWrapper> */}
     </div>
   );
 };

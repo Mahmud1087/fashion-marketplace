@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Logo = () => {
   return (
-    <Link href='/' className='font-bold text-lg'>
+    <Link href='/' className='font-medium text-lg'>
       FashMall
     </Link>
   );
