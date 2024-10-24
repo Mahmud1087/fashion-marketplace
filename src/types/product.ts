@@ -17,4 +17,5 @@ export type Product = {
   noOfStarReview: number;
   isWishList: boolean;
   qty: number;
+  isAddedToWishList: boolean;
 };

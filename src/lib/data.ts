@@ -97,6 +97,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 2,
@@ -117,6 +118,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 3,
@@ -137,6 +139,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 4,
@@ -157,6 +160,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 5,
@@ -177,6 +181,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 6,
@@ -197,6 +202,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 7,
@@ -217,6 +223,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 8,
@@ -237,6 +244,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 9,
@@ -257,6 +265,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 10,
@@ -277,6 +286,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 11,
@@ -297,6 +307,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 12,
@@ -317,6 +328,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 13,
@@ -337,6 +349,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 14,
@@ -357,6 +370,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 15,
@@ -377,6 +391,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 16,
@@ -397,6 +412,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 17,
@@ -417,6 +433,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 18,
@@ -437,6 +454,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 19,
@@ -457,6 +475,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 20,
@@ -477,6 +496,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 21,
@@ -497,6 +517,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 22,
@@ -517,6 +538,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 23,
@@ -537,6 +559,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 24,
@@ -557,6 +580,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 25,
@@ -577,6 +601,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 26,
@@ -597,6 +622,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 27,
@@ -617,6 +643,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 28,
@@ -637,6 +664,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 29,
@@ -657,6 +685,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 30,
@@ -677,6 +706,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 31,
@@ -697,6 +727,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 32,
@@ -717,6 +748,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 33,
@@ -737,6 +769,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 34,
@@ -757,6 +790,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 35,
@@ -777,6 +811,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 36,
@@ -797,6 +832,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 37,
@@ -817,6 +853,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 38,
@@ -837,6 +874,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 39,
@@ -857,6 +895,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 40,
@@ -877,6 +916,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 41,
@@ -897,6 +937,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 42,
@@ -917,6 +958,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 43,
@@ -937,6 +979,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 44,
@@ -957,6 +1000,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 45,
@@ -977,6 +1021,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 46,
@@ -997,6 +1042,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 47,
@@ -1017,6 +1063,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 48,
@@ -1037,6 +1084,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 49,
@@ -1057,6 +1105,7 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
   {
     id: 50,
@@ -1077,5 +1126,6 @@ export const products = [
     isWishList: false,
     qty: 1,
     isAvailable: true,
+    isAddedToWishList: false,
   },
 ];

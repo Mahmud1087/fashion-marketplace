@@ -9,11 +9,14 @@ import {
 } from '@/components/ui/carousel';
 import Image from 'next/image';
 import { cn, USD } from '@/lib/utils';
-import { products } from '@/lib/data';
 import Link from 'next/link';
 import AddToCartButton from './add-to-cart';
-
-type Product = (typeof products)[number];
+import StarReview from './star-review';
+import { Button, buttonVariants } from '../ui/button';
+import { Heart } from 'lucide-react';
+import { Product } from '@/types/product';
+import { useStore } from '@/store/store';
+import { useShallow } from 'zustand/react/shallow';
 
 interface ListedProductsProperties {
   products: Product[];
@@ -21,6 +24,12 @@ interface ListedProductsProperties {
 }
 
 const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
+  const { addtoList } = useStore(
+    useShallow((state) => ({
+      addtoList: state.addtoList,
+    }))
+  );
+
   return (
     <Carousel className='w-full '>
       <CarouselContent className='-ml-3 pr-12 sm:-ml-4 sm:pr-32 lg:-ml-3 lg:pr-12'>
@@ -66,7 +75,7 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                     View Product details
                   </Link>
                 </section>
-                <div className='shadow rounded-lg border-t-0 w-full pb-4 pt-2 px-4 flex flex-col gap-4 lg:gap-2'>
+                <div className='shadow rounded-lg border-t-0 w-full py-4 px-4 flex flex-col gap-2'>
                   <p className='font-medium text-xl lg:text-lg'>
                     {product.name.length > 20
                       ? `${product.name.slice(0, 20)}...`
@@ -96,10 +105,23 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
 
                     <Link
                       href={`/shop/${product.id}`}
-                      className='block px-2 py-1 rounded-md border shadow font-medium lg:hidden'
+                      className={`${buttonVariants()} block bg-black/85 hover:bg-black/95 lg:hidden`}
+                      // className='block px-3 py-1 rounded-md border font-medium lg:hidden'
                     >
                       View Product
                     </Link>
+                  </div>
+                  <div className='flex items-center justify-between flex-row-reverse sm:flex-row'>
+                    <StarReview />
+                    <Button
+                      variant='outline'
+                      className='px-3'
+                      onClick={() => {
+                        addtoList(product, product.id);
+                      }}
+                    >
+                      <Heart size={16} />
+                    </Button>
                   </div>
                   <AddToCartButton product={product} />
                 </div>

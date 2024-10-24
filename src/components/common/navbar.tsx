@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Heart, User } from 'lucide-react';
+import { Check, User } from 'lucide-react';
 import { Button, buttonVariants } from '../ui/button';
 import Logo from './logo';
 import Navlinks from './navlinks';
@@ -11,6 +11,7 @@ import MaxWidthWrapper from './max-width-wrapper';
 import Cart from './cart';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
+import Wishlist from './wishlist';
 
 const Navbar = () => {
   const { ref, inView } = useInView({
@@ -66,11 +67,10 @@ const Navbar = () => {
           <div className='flex gap-4 items-center'>
             <Cart />
 
+            <Wishlist />
+
             <Sidebar />
 
-            <Button variant='secondary' className='hidden sm:block'>
-              <Heart size={18} />
-            </Button>
             <Link
               href='/login'
               className={buttonVariants({
@@ -88,9 +88,6 @@ const Navbar = () => {
         <MaxWidthWrapper className='py-3 flex justify-between items-center'>
           <SearchField className='block sm:hidden' />
           <section className='flex gap-3'>
-            <Button variant='secondary' className='block sm:hidden'>
-              <Heart size={18} />
-            </Button>
             <Link
               href='/login'
               className={buttonVariants({

@@ -1,50 +1,45 @@
 'use client';
 
-import { ShoppingCart, Trash2 } from 'lucide-react';
+import { Heart, ShoppingCart, Trash2 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Separator } from '@radix-ui/react-separator';
-import Image from 'next/image';
-import emptyCart from '~/public/emptyCart.png';
 import { useStore } from '@/store/store';
-import ChangeQtyButtons from './change-quantity-buttons';
-import { USD } from '@/lib/utils';
 import { useShallow } from 'zustand/react/shallow';
+import Image from 'next/image';
+import { USD } from '@/lib/utils';
 
-const Cart = () => {
-  const { cartProducts, removeFromCart, cartTotal, reset } = useStore(
+const Wishlist = () => {
+  const { wishLists, removeFromList, resetList, addToCart } = useStore(
     useShallow((state) => ({
-      cartProducts: state.cartProducts,
-      removeFromCart: state.removeFromCart,
-      cartTotal: state.totalPrice,
-      reset: state.reset,
+      wishLists: state.wishLists,
+      resetList: state.resetList,
+      removeFromList: state.removeFromList,
+      addToCart: state.addToCart,
     }))
   );
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button
-          variant='secondary'
-          className='relative flex gap-2 items-center'
-        >
-          <ShoppingCart size={18} />
-          <span className='absolute -top-2 -right-1 text-white bg-primary rounded-full h-5 w-5 text-xs flex items-center justify-center'>
-            {cartProducts.length}
+        <Button variant='secondary' className='relative'>
+          <Heart size={18} />
+          <span className='absolute -top-2 -right-1 text-white bg-rose-800 rounded-full h-5 w-5 text-xs flex items-center justify-center'>
+            {wishLists.length}
           </span>
         </Button>
       </SheetTrigger>
-      <SheetContent className='w-[85%] sm:max-w-md'>
+      <SheetContent className='sm:max-w-md w-[85%]'>
         <section className='flex items-center justify-between'>
           <h1 className='text-xl flex gap-3 items-center'>
-            Cart
+            WishLists
             <span className='text-white bg-primary rounded-full h-6 w-6 text-sm font-bold flex items-center justify-center'>
-              {cartProducts.length}
+              {wishLists.length}
             </span>
           </h1>
-          {cartProducts.length !== 0 && (
-            <Button variant='destructive' className='mr-6' onClick={reset}>
-              Clear Cart
+          {wishLists.length !== 0 && (
+            <Button variant='destructive' className='mr-6' onClick={resetList}>
+              Clear list
             </Button>
           )}
         </section>
@@ -52,23 +47,23 @@ const Cart = () => {
         <Separator className='my-3 border-b border-black/5' />
 
         <div className='h-full w-full'>
-          {cartProducts.length === 0 ? (
+          {wishLists.length === 0 ? (
             <div className='h-full w-full flex flex-col gap-3 items-center justify-center'>
-              <div className='w-56 h-56'>
+              {/* <div className='w-56 h-56'>
                 <Image
                   src={emptyCart}
                   alt='Empty Cart Icon'
                   className='w-full h-full'
                 />
-              </div>
+              </div> */}
               <h1 className='text-xl italic text-center'>
-                Oops😢, your cart is empty
+                Oops😢, you don&apos;t have anything in your wishlist
               </h1>
             </div>
           ) : (
             <div className='flex flex-col gap-4 h-full'>
               <div className='flex flex-col h-[62%] overflow-x-hidden overflow-y-scroll cart-scrollbar transition-all'>
-                {cartProducts.map((product) => {
+                {wishLists.map((product) => {
                   return (
                     <section
                       key={product.id}
@@ -88,10 +83,25 @@ const Cart = () => {
                               ? `${product.name.slice(0, 10)}...`
                               : product.name}
                           </h1>
-                          <p className='block font-medium sm:hidden'>
-                            {USD(product.price)}
-                          </p>
-                          <ChangeQtyButtons productId={product.id} />
+                          <div className='flex gap-3 items-center font-medium sm:hidden'>
+                            <span>{USD(product.price)}</span>
+                            <button
+                              className='px-3 py-2 rounded-md bg-primary text-white hover:bg-primary/75 lg:hidden'
+                              onClick={() => {
+                                addToCart(product, product.id);
+                              }}
+                            >
+                              <ShoppingCart size={16} />
+                            </button>
+                          </div>
+                          <Button
+                            className='hidden w-fit lg:block'
+                            onClick={() => {
+                              addToCart(product, product.id);
+                            }}
+                          >
+                            <ShoppingCart size={16} />
+                          </Button>
                         </aside>
                       </div>
                       <div className='flex items-center gap-6'>
@@ -101,7 +111,7 @@ const Cart = () => {
                         <Button
                           variant='ghost'
                           onClick={() => {
-                            removeFromCart(product.id);
+                            removeFromList(product.id);
                           }}
                         >
                           <Trash2 className='text-red-500' size={18} />
@@ -111,21 +121,6 @@ const Cart = () => {
                   );
                 })}
               </div>
-              <section className='h-[28%] border-t pt-4 pb-2 flex flex-col gap-2'>
-                <div className='flex justify-between items-center'>
-                  <p className='text-base'>Shipping</p>
-                  <p className='font-medium'>Free</p>
-                </div>
-                <div className='flex justify-between items-center'>
-                  <p className='text-base'>Transaction Fee</p>
-                  <p className='font-medium'>{USD(Number(1))}</p>
-                </div>
-                <div className='flex justify-between items-center'>
-                  <p className='text-base'>Total</p>{' '}
-                  <p className='font-medium'>{USD(Number(cartTotal))}</p>
-                </div>
-                <Button className=''>Proceed to checkout</Button>
-              </section>
             </div>
           )}
         </div>
@@ -133,4 +128,4 @@ const Cart = () => {
     </Sheet>
   );
 };
-export default Cart;
+export default Wishlist;
