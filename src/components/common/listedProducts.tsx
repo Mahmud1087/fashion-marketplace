@@ -12,11 +12,12 @@ import { cn, USD } from '@/lib/utils';
 import Link from 'next/link';
 import AddToCartButton from './add-to-cart';
 import StarReview from './star-review';
-import { Button, buttonVariants } from '../ui/button';
-import { Heart } from 'lucide-react';
+import { buttonVariants } from '../ui/button';
+// import { Heart } from 'lucide-react';
 import { Product } from '@/types/product';
-import { useStore } from '@/store/store';
-import { useShallow } from 'zustand/react/shallow';
+// import { useStore } from '@/store/store';
+// import { useShallow } from 'zustand/react/shallow';
+import AddToWishlistButton from './add-to-wishlist';
 
 interface ListedProductsProperties {
   products: Product[];
@@ -24,11 +25,11 @@ interface ListedProductsProperties {
 }
 
 const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
-  const { addtoList } = useStore(
-    useShallow((state) => ({
-      addtoList: state.addtoList,
-    }))
-  );
+  // const { addtoList } = useStore(
+  //   useShallow((state) => ({
+  //     addtoList: state.addtoList,
+  //   }))
+  // );
 
   return (
     <Carousel className='w-full '>
@@ -113,15 +114,7 @@ const ListedProducts = ({ products, isFeatured }: ListedProductsProperties) => {
                   </div>
                   <div className='flex items-center justify-between flex-row-reverse sm:flex-row'>
                     <StarReview />
-                    <Button
-                      variant='outline'
-                      className='px-3'
-                      onClick={() => {
-                        addtoList(product, product.id);
-                      }}
-                    >
-                      <Heart size={16} />
-                    </Button>
+                    <AddToWishlistButton product={product} />
                   </div>
                   <AddToCartButton product={product} />
                 </div>

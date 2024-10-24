@@ -86,7 +86,7 @@ const SingleProductPage = ({ params }: { params: { productId: number } }) => {
               <aside className='flex flex-col gap-4'>
                 <div className='flex items-center gap-2'>
                   <AddToCartButton product={product} />
-                  <AddToWishlistButton />
+                  <AddToWishlistButton product={product} />
                 </div>
                 <div></div>
               </aside>
