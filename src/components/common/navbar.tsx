@@ -53,7 +53,7 @@ const Navbar = () => {
         className={cn(
           'h-16 flex items-center justify-center bg-[#9A9CAA]/50 transition-all duration-300 ease-in-out',
           {
-            'sticky top-0 left-0 w-full bg-[#9A9CAA]/65 shadow-lg backdrop-blur-md z-50':
+            'sticky top-0 left-0 w-full bg-[#9A9CAA]/65 shadow-lg backdrop-blur-md z-[999]':
               !inView,
             '-top-11': inView,
           }

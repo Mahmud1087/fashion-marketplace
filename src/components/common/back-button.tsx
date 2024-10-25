@@ -9,7 +9,7 @@ const BackButton = () => {
   return (
     <Button
       variant='outline'
-      className='flex gap-2 items-center shadow-md'
+      className='flex gap-2 items-center shadow-md w-fit'
       onClick={router.back}
     >
       <ArrowLeft size={17} strokeWidth={3} />
