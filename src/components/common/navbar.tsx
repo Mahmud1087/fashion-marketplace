@@ -6,8 +6,6 @@ import Logo from './logo';
 import Navlinks from './navlinks';
 import Link from 'next/link';
 import Sidebar from './sidebar';
-import SearchField from './search-products';
-import MaxWidthWrapper from './max-width-wrapper';
 import Cart from './cart';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -28,7 +26,7 @@ const Navbar = () => {
             <span>Your number one fashion marketplace</span>
           </h1>
 
-          <Navlinks />
+          {/* <Navlinks /> */}
 
           <aside className='flex items-center gap-6'>
             <Button variant='ghost' asChild className='text-[13px]'>
@@ -62,7 +60,10 @@ const Navbar = () => {
         <div className='flex items-center justify-between w-[90%] mx-auto sm:w-4/5'>
           <Logo />
 
-          <SearchField className='hidden sm:block' />
+          <div className='hidden sm:block'>
+            <Navlinks />
+          </div>
+          {/* <SearchField className='hidden sm:block' /> */}
 
           <div className='flex gap-4 items-center'>
             <Cart />
@@ -84,7 +85,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div className='bg-[#272343] block sm:hidden'>
+      {/* <div className='bg-[#272343] block sm:hidden'>
         <MaxWidthWrapper className='py-3 flex justify-between items-center'>
           <SearchField className='block sm:hidden' />
           <section className='flex gap-3'>
@@ -99,7 +100,7 @@ const Navbar = () => {
             </Link>
           </section>
         </MaxWidthWrapper>
-      </div>
+      </div> */}
     </>
   );
 };

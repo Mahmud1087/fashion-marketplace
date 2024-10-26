@@ -1,5 +1,5 @@
-import { Menu } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Menu, User } from 'lucide-react';
+import { Button, buttonVariants } from '../ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import Logo from './logo';
 import { Separator } from '../ui/separator';
@@ -15,7 +15,17 @@ const Sidebar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent>
-        <Logo />
+        <div className='flex justify-between items-center mr-4'>
+          <Logo />
+          <Link
+            href='/login'
+            className={buttonVariants({
+              variant: 'secondary',
+            })}
+          >
+            <User size={18} />
+          </Link>
+        </div>
         <div className='my-4'>
           <Separator />
         </div>

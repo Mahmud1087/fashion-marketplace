@@ -8,6 +8,7 @@ type ProductsState = {
 
 type ProductsActions = {
   getSingleProductById: (productId: number | string) => Product | undefined;
+  onSearch: (searchTerm: string) => void;
 };
 
 export type ProductSlice = ProductsState & ProductsActions;
@@ -25,4 +26,16 @@ export const createProductSlice: StateCreator<
   ...initialState,
   getSingleProductById: (productId) =>
     get().products.find((product) => product.id === productId),
+  onSearch: (searchTerm) =>
+    set((state) => {
+      if (searchTerm === '') {
+        state.products = products;
+      } else {
+        state.products = state.products.filter(
+          (product) =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.category.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+    }),
 });

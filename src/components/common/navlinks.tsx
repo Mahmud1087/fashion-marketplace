@@ -33,9 +33,9 @@ const Navlinks = () => {
             <Link
               href={link.href}
               className={cn(
-                'text-blue-950 font-bold py-1 px-3 hover:bg-primary/80 hover:py-1 hover:px-3 hover:rounded-full hover:text-white transition-all sm:text-gray-300 w-full sm:font-normal sm:hover:bg-primary/40 sm:hover:text-gray-300',
+                'text-blue-950 font-bold py-1 px-3 hover:bg-primary/80 hover:py-1 hover:px-3 hover:rounded-full hover:text-white transition-all sm:text-blue-950 w-full sm:hover:bg-primary sm:font-medium sm:hover:text-gray-100',
                 {
-                  'bg-primary/80 py-1 px-3 rounded-full w-full text-white sm:bg-primary/40':
+                  'bg-primary/80 py-1 px-3 rounded-full w-full text-white sm:bg-primary sm:text-gray-100':
                     pathname === link.href,
                 }
               )}

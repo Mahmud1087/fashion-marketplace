@@ -45,7 +45,7 @@ const MobileFilteringOptions = () => {
   const [category, setCategory] = useState('');
 
   return (
-    <form className='md:hidden'>
+    <form className='lg:hidden'>
       <Popover>
         <PopoverTrigger asChild>
           <Button variant={'secondary'} className='shadow border gap-3'>
