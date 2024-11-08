@@ -81,6 +81,7 @@ const DesktopFilteringOption = () => {
     setSelected: React.Dispatch<React.SetStateAction<string[]>>,
     selected: string[]
   ) => {
+    console.log(selected);
     setSelected((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
