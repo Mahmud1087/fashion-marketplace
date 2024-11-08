@@ -5,6 +5,8 @@ import Logo from './logo';
 import { Separator } from '../ui/separator';
 import Navlinks from './navlinks';
 import Link from 'next/link';
+import { Authenticated, Unauthenticated } from 'convex/react';
+import UserBtn from './userButton';
 
 const Sidebar = () => {
   return (
@@ -17,14 +19,19 @@ const Sidebar = () => {
       <SheetContent>
         <div className='flex justify-between items-center mr-4'>
           <Logo />
-          <Link
-            href='/login'
-            className={buttonVariants({
-              variant: 'secondary',
-            })}
-          >
-            <User size={18} />
-          </Link>
+          <Unauthenticated>
+            <Link
+              href='/login'
+              className={buttonVariants({
+                variant: 'secondary',
+              })}
+            >
+              <User size={18} />
+            </Link>
+          </Unauthenticated>
+          <Authenticated>
+            <UserBtn />
+          </Authenticated>
         </div>
         <div className='my-4'>
           <Separator />

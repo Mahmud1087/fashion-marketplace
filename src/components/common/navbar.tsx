@@ -10,6 +10,8 @@ import Cart from './cart';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import Wishlist from './wishlist';
+import { Authenticated, Unauthenticated } from 'convex/react';
+import UserBtn from './userButton';
 
 const Navbar = () => {
   const { ref, inView } = useInView({
@@ -72,15 +74,22 @@ const Navbar = () => {
 
             <Sidebar />
 
-            <Link
-              href='/login'
-              className={buttonVariants({
-                variant: 'secondary',
-                className: 'hidden sm:block',
-              })}
-            >
-              <User size={18} />
-            </Link>
+            <Unauthenticated>
+              <Link
+                href='/login'
+                className={buttonVariants({
+                  variant: 'secondary',
+                  className: 'hidden sm:block',
+                })}
+              >
+                <User size={18} />
+              </Link>
+            </Unauthenticated>
+            <Authenticated>
+              <div className='hidden sm:block'>
+                <UserBtn />
+              </div>
+            </Authenticated>
           </div>
         </div>
       </nav>

@@ -10,44 +10,45 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { registerFormSchema } from '@/lib/schema';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { Separator } from '@radix-ui/react-separator';
-import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
+// import { Button } from '@/components/ui/button';
+// import {
+//   Form,
+//   FormControl,
+//   FormField,
+//   FormItem,
+//   FormLabel,
+//   FormMessage,
+// } from '@/components/ui/form';
+// import { Input } from '@/components/ui/input';
+// import { registerFormSchema } from '@/lib/schema';
+// import { useForm } from 'react-hook-form';
+// import { z } from 'zod';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import Link from 'next/link';
+// import { Separator } from '@radix-ui/react-separator';
+// import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+// import { useState } from 'react';
+import { SignUp } from '@clerk/nextjs';
 
 const RegisterPage = () => {
-  const [password, setPassword] = useState(false);
-  const [cpassword, setCPassword] = useState(false);
+  // const [password, setPassword] = useState(false);
+  // const [cpassword, setCPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof registerFormSchema>>({
-    resolver: zodResolver(registerFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      fullName: '',
-    },
-  });
+  // const form = useForm<z.infer<typeof registerFormSchema>>({
+  //   resolver: zodResolver(registerFormSchema),
+  //   defaultValues: {
+  //     email: '',
+  //     password: '',
+  //     confirmPassword: '',
+  //     fullName: '',
+  //   },
+  // });
 
-  function onSubmit(values: z.infer<typeof registerFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+  // function onSubmit(values: z.infer<typeof registerFormSchema>) {
+  //   // Do something with the form values.
+  //   // ✅ This will be type-safe and validated.
+  //   console.log(values);
+  // }
 
   return (
     <div className='my-10'>
@@ -69,15 +70,15 @@ const RegisterPage = () => {
               </BreadcrumbPage>
             </BreadcrumbList>
           </Breadcrumb>
-          <section className='text-center mt-12'>
+          {/* <section className='text-center mt-12'>
             <h1 className='text-2xl font-medium'>Sign Up</h1>
             <p className='text-gray-500 mt-1'>
               Create an account to get access to our amazing an endless features
             </p>
-          </section>
+          </section> */}
         </header>
 
-        <Form {...form}>
+        {/* <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className='space-y-5 mt-24 w-full sm:w-3/5 lg:w-2/5 p-10 mx-auto shadow-lg border rounded-lg sm:mt-16'
@@ -176,10 +177,7 @@ const RegisterPage = () => {
               </Link>
             </p>
             <aside className='flex flex-col items-center gap-5'>
-              {/* <aside className='flex items-center gap-5'> */}
-              {/* <Separator className='border w-full' />
-              <span>or</span>
-              <Separator className='border w-full' /> */}
+              
               <Separator className='mt-5 border w-full' />
               <p className='text-center text-gray-500'>
                 By continuing, you agree to our{' '}
@@ -199,7 +197,10 @@ const RegisterPage = () => {
               </Button>
             </aside>
           </form>
-        </Form>
+        </Form> */}
+        <section className='flex justify-center items-center'>
+          <SignUp />
+        </section>
       </MaxWidthWrapper>
     </div>
   );

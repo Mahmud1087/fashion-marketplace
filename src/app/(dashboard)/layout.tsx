@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../globals.css';
-import Navbar from '@/components/common/navbar';
 import { Toaster } from '@/components/ui/sonner';
-import Footer from '@/components/common/footer';
 import { ConvexClientProvider } from '../ConvexClientProvider';
 import { ClerkProvider } from '@clerk/nextjs';
 
@@ -27,11 +25,7 @@ export default function RootLayout({
           publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
         >
           <ConvexClientProvider>
-            <main className=''>
-              <Navbar />
-              {children}
-              <Footer />
-            </main>
+            <main className=''>{children}</main>
             <Toaster />
           </ConvexClientProvider>
         </ClerkProvider>

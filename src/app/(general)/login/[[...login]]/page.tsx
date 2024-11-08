@@ -10,41 +10,42 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { loginFormSchema } from '@/lib/schema';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { Separator } from '@radix-ui/react-separator';
-import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
+// import { Button } from '@/components/ui/button';
+// import {
+//   Form,
+//   FormControl,
+//   FormField,
+//   FormItem,
+//   FormLabel,
+//   FormMessage,
+// } from '@/components/ui/form';
+// import { Input } from '@/components/ui/input';
+// import { loginFormSchema } from '@/lib/schema';
+// import { useForm } from 'react-hook-form';
+// import { z } from 'zod';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import Link from 'next/link';
+// import { Separator } from '@radix-ui/react-separator';
+// import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+// import { useState } from 'react';
+import { SignIn } from '@clerk/nextjs';
 
 const LoginPage = () => {
-  const [password, setPassword] = useState(false);
+  // const [password, setPassword] = useState(false);
 
-  const form = useForm<z.infer<typeof loginFormSchema>>({
-    resolver: zodResolver(loginFormSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
+  // const form = useForm<z.infer<typeof loginFormSchema>>({
+  //   resolver: zodResolver(loginFormSchema),
+  //   defaultValues: {
+  //     email: '',
+  //     password: '',
+  //   },
+  // });
 
-  function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
+  // function onSubmit(values: z.infer<typeof loginFormSchema>) {
+  //   // Do something with the form values.
+  //   // ✅ This will be type-safe and validated.
+  //   console.log(values);
+  // }
 
   return (
     <div className='my-10'>
@@ -65,15 +66,15 @@ const LoginPage = () => {
             </BreadcrumbList>
           </Breadcrumb>
 
-          <section className='text-center mt-12'>
+          {/* <section className='text-center mt-12'>
             <h1 className='text-2xl font-medium'>Sign In</h1>
             <p className='text-gray-500 mt-1'>
               Sign in to get access to your account
             </p>
-          </section>
+          </section> */}
         </header>
 
-        <Form {...form}>
+        {/* <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className='space-y-5 mt-16 w-full sm:w-3/5 lg:w-2/5 p-10 mx-auto shadow-lg border rounded-lg'
@@ -128,10 +129,7 @@ const LoginPage = () => {
               </Link>
             </p>
             <aside className='flex flex-col items-center gap-5'>
-              {/* <aside className='flex items-center gap-5'> */}
-              {/* <Separator className='border w-full' />
-              <span>or</span>
-              <Separator className='border w-full' /> */}
+              
               <Separator className='mt-5 border w-full' />
               <p className='text-center text-gray-500'>
                 By continuing, you agree to our{' '}
@@ -151,7 +149,10 @@ const LoginPage = () => {
               </Button>
             </aside>
           </form>
-        </Form>
+        </Form> */}
+        <section className='flex justify-center items-center'>
+          <SignIn />
+        </section>
       </MaxWidthWrapper>
     </div>
   );
