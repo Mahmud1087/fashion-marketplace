@@ -44,7 +44,7 @@ const DashboardMain = ({ link }: DashboardMainProps) => {
           <UserButton />
         </div>
       </nav>
-      <section className='p-4'>
+      <section className='p-4 sm:px-14'>
         {link === 'Overview' ? (
           <Overview />
         ) : link === 'Analytics' ? (
