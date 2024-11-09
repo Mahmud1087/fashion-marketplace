@@ -26,7 +26,7 @@ const overviewCards = [
     value: USD(5245),
     color: 'text-green-500',
     icon: <CircleDollarSign size={20} />,
-    percent: 7,
+    percent: 12,
   },
   {
     text: 'Total Customers',
@@ -40,7 +40,7 @@ const overviewCards = [
     value: 2356,
     color: 'text-orange-500',
     icon: <Folders size={20} />,
-    percent: 3.5,
+    percent: -3.5,
   },
 ];
 
@@ -98,15 +98,15 @@ const salesRev = [
 const Overview = () => {
   return (
     <div>
-      <header className='text-lg mb-7 sm:text-xl sm:hidden'>Overview</header>
+      <header className='text-lg mb-4 sm:text-xl sm:hidden'>Overview</header>
       <section>
-        <div className='mt-6 grid gap-4 sm:grid-cols-3'>
+        <div className='mt-4 grid gap-4 sm:mt-0 sm:grid-cols-3'>
           <DashboardTopCard />
         </div>
 
         <div className='flex flex-col gap-6 lg:flex-row'>
           <aside className='w-full lg:w-[65%] '>
-            <div className='pt-6 pb-20 px-4 h-96 w-full rounded-md border shadow-lg mt-8 sm:px-10 sm:shadow-xl lg:h-[30rem]'>
+            <div className='pt-6 pb-20 px-4 h-96 w-full rounded-xl border shadow-lg mt-4 bg-white sm:px-10 sm:shadow-xl lg:h-[30rem]'>
               <div className='mb-5'>
                 <aside className='flex items-center justify-between'>
                   <h1 className='text-base'>Revenue</h1>
@@ -119,7 +119,7 @@ const Overview = () => {
               <SalesRevenue />
             </div>
           </aside>
-          <aside className='h-[30rem] w-full border shadow-md mb-4 py-3 px-4 lg:w-[35%] rounded-xl overflow-y-scroll cart-scrollbar lg:mt-8'>
+          <aside className='h-[30rem] w-full border shadow-md mb-4 py-3 px-4 lg:w-[35%] rounded-xl bg-white overflow-y-scroll cart-scrollbar lg:mt-4'>
             <Activity />
           </aside>
         </div>
@@ -136,7 +136,7 @@ const DashboardTopCard = () => {
         <div
           key={card.text}
           className={cn(
-            'flex flex-col gap-2 border shadow-md w-full rounded-lg'
+            'flex flex-col gap-2 border shadow-md w-full rounded-lg bg-white'
           )}
         >
           <div className='p-5'>
@@ -153,7 +153,12 @@ const DashboardTopCard = () => {
               </div>
             </aside>
             <p className='text-gray-500'>
-              <span className={cn('font-medium text-green-500')}>
+              <span
+                className={cn('font-medium', {
+                  'text-green-500': card.percent > 0,
+                  'text-red-500': card.percent < 0,
+                })}
+              >
                 {card.percent}%
               </span>{' '}
               vs last month

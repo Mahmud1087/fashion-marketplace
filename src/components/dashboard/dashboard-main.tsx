@@ -28,7 +28,7 @@ const DashboardMain = ({ link }: DashboardMainProps) => {
 
   return (
     <div className='w-5/6 h-full relative left-[16.666667%]'>
-      <nav className='border-b shadow-xs p-4 flex justify-between items-center sm:px-14'>
+      <nav className='border-b shadow-xs p-4 flex justify-between items-center bg-white sm:px-14'>
         <h1 className='text-sm'>
           {greeting}, {user?.firstName?.toLocaleUpperCase()}
         </h1>

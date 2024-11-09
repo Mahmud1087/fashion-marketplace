@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [link, setLink] = useState('Overview');
 
   return (
-    <div className='flex relative'>
+    <div className='flex relative bg-secondary'>
       <DashboardSidebar link={link} setLink={setLink} />
       <DashboardMain link={link} />
     </div>
