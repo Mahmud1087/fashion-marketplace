@@ -3,6 +3,8 @@ import {
   ArrowDown,
   CircleDollarSign,
   Folders,
+  Info,
+  Star,
   User,
   UsersRound,
 } from 'lucide-react';
@@ -12,13 +14,35 @@ import {
   CartesianGrid,
   Legend,
   Rectangle,
-  ResponsiveContainer,
-  Tooltip,
   XAxis,
-  YAxis,
 } from 'recharts';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
+import Image from 'next/image';
+import img from '~/public/Fashionable and Popular Men Star Decor Round Charm Layered Necklace Stainless Steel for Jewelry Gift and for a Stylish Look.jpeg';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '../ui/dropdown-menu';
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '../ui/chart';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../ui/table';
 
 const overviewCards = [
   {
@@ -123,7 +147,9 @@ const Overview = () => {
             <Activity />
           </aside>
         </div>
-        <div className='w-full'>Others</div>
+        <div className='w-full py-3 px-4 rounded-xl bg-white shadow-md my-4'>
+          <TopProducts />
+        </div>
       </section>
     </div>
   );
@@ -171,33 +197,46 @@ const DashboardTopCard = () => {
 };
 
 const SalesRevenue = () => {
+  const chartConfig = {
+    amount: {
+      label: 'Amount of Sales',
+      color: 'hsl(var(--chart-1))',
+    },
+  } satisfies ChartConfig;
+
   return (
     <>
-      <ResponsiveContainer width='100%' height='100%'>
+      <ChartContainer config={chartConfig} className='min-h-[17rem] w-full'>
         <BarChart
+          accessibilityLayer
           data={salesRev}
           margin={{
             top: 20,
-            // right: 20,
-            left: -20,
             bottom: 5,
           }}
-          barSize={20}
         >
-          <CartesianGrid />
-          <XAxis dataKey='month' />
-          <YAxis />
-          <Tooltip />
+          <CartesianGrid vertical={false} stroke='hsl(var(--muted))' />
+          <XAxis
+            dataKey='month'
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+          />
+          <ChartTooltip
+            formatter={(value) => USD(value as number)}
+            content={<ChartTooltipContent />}
+          />
+          <ChartLegend content={<ChartLegendContent />} />
           <Bar
             dataKey='amount'
-            name='Amount'
+            name='Revenue'
             fill='hsl(var(--primary)/0.8)'
             radius={[10, 10, 0, 0]}
             activeBar={<Rectangle fill='hsl(var(--primary))' />}
           />
           <Legend />
         </BarChart>
-      </ResponsiveContainer>
+      </ChartContainer>
     </>
   );
 };
@@ -280,6 +319,197 @@ const Activity = () => {
           );
         })}
       </div>
+    </>
+  );
+};
+
+const TopProducts = () => {
+  const topProducts = [
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+    {
+      img,
+      name: 'Product',
+      price: 120,
+      sold: 500,
+      stock: 1000,
+      rating: 4.5,
+    },
+  ];
+
+  return (
+    <>
+      <header className='flex items-center justify-between'>
+        <h1 className='text-base sm:mb-10'>Top Products</h1>
+        <p className='text-gray-400 italic sm:hidden'>showing top 10</p>
+      </header>
+      <Separator className='mb-4 mt-2 sm:hidden' />
+
+      {/* desktop view */}
+      <section className='hidden sm:block'>
+        <Table>
+          <TableCaption>Showing top 10 selling products</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className='w-[100px]'>s/n</TableHead>
+              <TableHead>Product</TableHead>
+              <TableHead>Rating</TableHead>
+              <TableHead>Price / unit</TableHead>
+              <TableHead>Sold</TableHead>
+              <TableHead className='text-right'>In-Stock</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {topProducts.map((product, i) => {
+              return (
+                <TableRow key={i}>
+                  <TableCell className='w-[100px]'>{i + 1}</TableCell>
+                  <TableCell className='flex items-center gap-2'>
+                    <div className='h-12 w-12'>
+                      <Image
+                        src={product.img}
+                        alt='Product image'
+                        className='h-full w-full rounded-md'
+                      />
+                    </div>
+                    <p>{product.name}</p>
+                  </TableCell>
+                  <TableCell>
+                    <p className='flex items-center gap-2'>
+                      <Star size={15} fill='orange' color='orange' />
+                      <span>{product.rating}</span>
+                    </p>
+                  </TableCell>
+                  <TableCell>{USD(product.price)}</TableCell>
+                  <TableCell>{product.sold}</TableCell>
+                  <TableCell className='text-right'>{product.stock}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </section>
+
+      {/* mobile view */}
+      <section className='flex flex-col gap-4 sm:hidden'>
+        {topProducts.map((product, i) => {
+          return (
+            <>
+              <div key={i} className='flex justify-between items-center'>
+                <aside className='flex items-center gap-4'>
+                  <div className='h-12 w-12'>
+                    <Image
+                      src={product.img}
+                      alt='Product image'
+                      className='h-full w-full rounded-md'
+                    />
+                  </div>
+                  <h1>
+                    {product.name} {i + 1}
+                  </h1>
+                </aside>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Info size={18} color='hsl(var(--primary))' />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className='mr-6 w-44 bg-secondary'>
+                    <DropdownMenuItem className='w-full flex items-center justify-between'>
+                      <p>Price:</p>
+                      <p>{USD(product.price)}</p>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className='w-full flex items-center justify-between'>
+                      <p>Rating:</p>
+                      <p className='flex items-center gap-2'>
+                        <Star size={15} fill='orange' color='orange' />
+                        <span>{product.rating}</span>
+                      </p>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className='w-full flex items-center justify-between'>
+                      <p>Sold:</p>
+                      <p>{product.sold}</p>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className='w-full flex items-center justify-between'>
+                      <p>In-Stock:</p>
+                      <p>{product.stock} units</p>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+              <Separator />
+            </>
+          );
+        })}
+      </section>
     </>
   );
 };
