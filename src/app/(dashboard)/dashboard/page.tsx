@@ -1,9 +1,9 @@
-import Dashboard from '@/components/dashboard/dashboard';
+import Overview from '@/components/dashboard/overview';
 
 const DashboardRoot = () => {
   return (
     <div>
-      <Dashboard />
+      <Overview />
     </div>
   );
 };

@@ -2,46 +2,37 @@
 
 import { cn } from '@/lib/utils';
 import Logo from '../common/logo';
-import {
-  ChartNoAxesCombined,
-  Home,
-  LogOut,
-  Package,
-  Settings,
-  ShoppingBag,
-} from 'lucide-react';
-import { Dispatch, SetStateAction } from 'react';
+import { Home, LogOut, Package, Settings, ShoppingBag } from 'lucide-react';
 import { SignOutButton } from '@clerk/clerk-react';
-
-type Props = {
-  link: string;
-  setLink: Dispatch<SetStateAction<string>>;
-};
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const sidebarlinks = [
   {
     text: 'Overview',
     icon: <Home size={18} />,
-  },
-  {
-    text: 'Analytics',
-    icon: <ChartNoAxesCombined size={18} />,
+    href: '/dashboard',
   },
   {
     text: 'Order',
     icon: <ShoppingBag size={18} />,
+    href: '/dashboard/orders',
   },
   {
     text: 'Products',
     icon: <Package size={18} />,
+    href: '/dashboard/listed-products',
   },
   {
     text: 'Settings',
     icon: <Settings size={18} />,
+    href: '/dashboard/settings',
   },
 ];
 
-const DashboardSidebar = ({ link, setLink }: Props) => {
+const DashboardSidebar = () => {
+  const pathname = usePathname();
+
   return (
     <aside
       className={cn(
@@ -54,18 +45,18 @@ const DashboardSidebar = ({ link, setLink }: Props) => {
         <ul className='flex flex-col gap-5 mt-9 sm:gap-6'>
           {sidebarlinks.map((list, index) => (
             <li key={index} className='px-3 sm:px-4'>
-              <button
+              <Link
+                href={list.href}
                 className={cn(
                   'text-white w-full hover:bg-primary hover:rounded-md transition-all flex items-center justify-center py-2 sm:px-3 sm:items-center sm:justify-normal sm:gap-4',
                   {
-                    'bg-primary rounded-md': link === list.text,
+                    'bg-primary rounded-md': pathname === list.href,
                   }
                 )}
-                onClick={() => setLink(list.text)}
               >
                 <span>{list.icon}</span>
                 <span className='hidden sm:block'>{list.text}</span>
-              </button>
+              </Link>
             </li>
           ))}
         </ul>

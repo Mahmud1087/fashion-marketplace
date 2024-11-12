@@ -4,6 +4,8 @@ import '../globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import { ConvexClientProvider } from '../ConvexClientProvider';
 import { ClerkProvider } from '@clerk/nextjs';
+import DashboardSidebar from '@/components/dashboard/dashboard-sidebar';
+import DashboardNavbar from '@/components/dashboard/dashboard-navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,7 +27,13 @@ export default function RootLayout({
           publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
         >
           <ConvexClientProvider>
-            <main className=''>{children}</main>
+            <div>
+              <DashboardSidebar />
+              <div className='w-5/6 h-full relative left-[16.666667%] flex flex-col bg-secondary gap-3 sm:gap-6'>
+                <DashboardNavbar />
+                <main className='px-3 sm:px-10'>{children}</main>
+              </div>
+            </div>
             <Toaster />
           </ConvexClientProvider>
         </ClerkProvider>

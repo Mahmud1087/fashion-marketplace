@@ -1,3 +1,5 @@
+'use client';
+
 import { cn, USD } from '@/lib/utils';
 import {
   ArrowDown,
@@ -124,11 +126,11 @@ const Overview = () => {
     <div>
       <header className='text-lg mb-4 sm:text-xl sm:hidden'>Overview</header>
       <section>
-        <div className='mt-4 grid gap-4 sm:mt-0 sm:grid-cols-3'>
+        <div className='mt-4 grid gap-4 sm:mt-0 sm:grid-cols-3 sm:gap-3'>
           <DashboardTopCard />
         </div>
 
-        <div className='flex flex-col gap-6 lg:flex-row'>
+        <div className='flex flex-col gap-6 lg:flex-row lg:gap-3'>
           <aside className='w-full lg:w-[65%] '>
             <div className='pt-6 pb-20 px-4 h-96 w-full rounded-xl border shadow-lg mt-4 bg-white sm:px-10 sm:shadow-xl lg:h-[30rem]'>
               <div className='mb-5'>
