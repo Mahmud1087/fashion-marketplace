@@ -3,8 +3,9 @@
 import { useQuery } from 'convex/react';
 import { ChevronDown, Plus, Search } from 'lucide-react';
 import { api } from '~/convex/_generated/api';
-import { Button } from '../ui/button';
+import { buttonVariants } from '../ui/button';
 import Loader from '../common/loader';
+import Link from 'next/link';
 
 const DashboardProducts = () => {
   const getProductsByUser = useQuery(api.products.getProductsByUser);
@@ -18,7 +19,7 @@ const DashboardProducts = () => {
           htmlFor='searchProd'
           className='flex items-center justify-between px-1 py-1 border rounded-md bg-white/85 shadow-md sm:px-4'
         >
-          <aside className='flex items-center gap-2'>
+          <aside className='flex items-center gap-2 px-2'>
             <Search size={15} className='text-gray-500' />
             <input
               type='search'
@@ -43,13 +44,16 @@ const DashboardProducts = () => {
       ) : (
         <Loader />
       )}
-      <div className='mt-3'>
-        <Button>
+      <div className='mt-3 mb-6'>
+        <Link
+          href='/dashboard/listed-products/create'
+          className={buttonVariants()}
+        >
           <span className='hidden sm:block'>Create new product</span>
           <span className='sm:hidden'>
             <Plus />
           </span>
-        </Button>
+        </Link>
       </div>
       <section></section>
     </div>
