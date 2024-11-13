@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { Save } from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -30,8 +31,39 @@ const formSchema = z.object({
     .string()
     .min(100, { message: 'Must be at least 100 characters' })
     .max(300, { message: 'Maximum number of characters reached' }),
-  price: z.union([z.number(), z.string()], { message: 'Please enter price' }),
-  mainCategory: z.string({ message: 'Please select category' }),
+  price: z.union([
+    z.number().min(1, { message: 'price must be greater than zero' }),
+    z.string().min(1, { message: 'price must be greater than zero' }),
+  ]),
+  mainCategory: z.string().min(1, { message: 'Select category' }),
+  subCategory: z.string().min(1, { message: 'Select sub-category' }),
+  // image: z
+  //   .any()
+  //   .refine((files) => files?.length >= 1, { message: 'Image is required.' })
+  //   .refine(
+  //     (files) =>
+  //       ['image/jpeg', 'image/png', 'image/jpg'].includes(files?.[0]?.type),
+  //     { message: '.jpg, .jpeg, and .png files are accepted.' }
+  //   )
+  //   .refine((files) => files?.[0]?.size >= 5000000, {
+  //     message: `Max file size is 5MB.`,
+  //   }),
+  image: z.any(),
+  color: z.string(),
+  size: z.string(),
+  quantityInStock: z.union([
+    z.number().min(1, { message: 'must be greater than zero' }),
+    z.string().min(1, { message: 'must be greater than zero' }),
+  ]),
+  isDiscount: z.string().min(1, { message: 'select an option' }),
+  discountPercentage: z.union([
+    z.number().min(1, { message: 'must be greater than or equal to zero' }),
+    z.string().min(1, { message: 'must be greater than or equal to zero' }),
+  ]),
+  shippingFee: z.union([
+    z.number().min(0, { message: 'must be greater than or equal to zero' }),
+    z.string().min(0, { message: 'must be greater than or equal to zero' }),
+  ]),
 });
 
 const CreateProductForm = () => {
@@ -41,7 +73,15 @@ const CreateProductForm = () => {
       name: '',
       description: '',
       price: 0,
-      mainCategory: 'Men',
+      mainCategory: '',
+      subCategory: '',
+      // image: '',
+      color: '',
+      size: '',
+      quantityInStock: 0,
+      isDiscount: '',
+      discountPercentage: 0,
+      shippingFee: 0,
     },
   });
 
@@ -58,7 +98,7 @@ const CreateProductForm = () => {
         {form.watch('name') === '' ? '[Untitled]' : form.watch('name')}
       </h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4 mt-8'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6 my-8'>
           <FormField
             control={form.control}
             name='name'
@@ -133,7 +173,188 @@ const CreateProductForm = () => {
               </FormItem>
             )}
           />
-          <Button type='submit'>Submit</Button>
+          {form.watch('mainCategory') !== '' && (
+            <FormField
+              control={form.control}
+              name='subCategory'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Sub Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className='bg-white'>
+                        <SelectValue placeholder='Select sub-category' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='t-shirts'>T-shirts</SelectItem>
+                      <SelectItem value='bags'>Bags</SelectItem>
+                      <SelectItem value='trousers'>Trousers</SelectItem>
+                      <SelectItem value='accessories'>Accessories</SelectItem>
+                      <SelectItem value='shoes'>Shoes</SelectItem>
+                      <SelectItem value='caps'>Caps</SelectItem>
+                      <SelectItem value='others'>Others</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+          <FormField
+            control={form.control}
+            name='image'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Product Image <span className='text-red-500'>*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    type='file'
+                    {...field}
+                    className='bg-white flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 file:appearance-none'
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='quantityInStock'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  Quantity in stock <span className='text-red-500'>*</span>
+                </FormLabel>
+                <FormControl>
+                  <Input type='number' {...field} className='bg-white' />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className='flex flex-col items-center gap-4 w-full sm:flex-row'>
+            <div className='w-full sm:w-1/2'>
+              <FormField
+                control={form.control}
+                name='color'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Color</FormLabel>
+                    <FormControl>
+                      <Input {...field} className='bg-white w-full' />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className='w-full sm:w-1/2'>
+              <FormField
+                control={form.control}
+                name='size'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Size</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className='bg-white'>
+                          <SelectValue placeholder='Select size' />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value='xs'>XS</SelectItem>
+                        <SelectItem value='s'>S</SelectItem>
+                        <SelectItem value='m'>M</SelectItem>
+                        <SelectItem value='l'>L</SelectItem>
+                        <SelectItem value='xl'>XL</SelectItem>
+                        <SelectItem value='xxl'>XXL</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+          <div className='flex flex-col items-center gap-4 w-full sm:flex-row'>
+            <div className='w-full sm:w-1/2'>
+              <FormField
+                control={form.control}
+                name='isDiscount'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Any Discount? <span className='text-red-500'>*</span>
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className='bg-white'>
+                          <SelectValue placeholder='Select' />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value='yes'>Yes</SelectItem>
+                        <SelectItem value='no'>Not at the moment</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            {form.watch('isDiscount') === 'yes' && (
+              <div className='w-full sm:w-1/2'>
+                <FormField
+                  control={form.control}
+                  name='discountPercentage'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Discount Percentage (5 = 5%)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type='number'
+                          {...field}
+                          className='bg-white w-full'
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
+          </div>
+          <FormField
+            control={form.control}
+            name='shippingFee'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Shipping Fee</FormLabel>
+                <FormControl>
+                  <Input type='number' {...field} className='bg-white' />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <aside className='w-full flex justify-end items-center'>
+            <Button type='submit' className='flex items-center gap-2'>
+              <span>Save</span>
+              <Save size={18} />
+            </Button>
+          </aside>
         </form>
       </Form>
     </div>
