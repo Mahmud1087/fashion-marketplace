@@ -21,7 +21,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { Save } from 'lucide-react';
+import { ImagePlus, Save } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import { ChangeEvent, useState } from 'react';
+
+const MAX_FILE_SIZE = 3 * 1024 * 1024;
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -31,42 +36,34 @@ const formSchema = z.object({
     .string()
     .min(100, { message: 'Must be at least 100 characters' })
     .max(300, { message: 'Maximum number of characters reached' }),
-  price: z.union([
-    z.number().min(1, { message: 'price must be greater than zero' }),
-    z.string().min(1, { message: 'price must be greater than zero' }),
-  ]),
+  price: z.coerce
+    .number()
+    .min(1, { message: 'Price must be greater than zero' }),
   mainCategory: z.string().min(1, { message: 'Select category' }),
   subCategory: z.string().min(1, { message: 'Select sub-category' }),
-  // image: z
-  //   .any()
-  //   .refine((files) => files?.length >= 1, { message: 'Image is required.' })
-  //   .refine(
-  //     (files) =>
-  //       ['image/jpeg', 'image/png', 'image/jpg'].includes(files?.[0]?.type),
-  //     { message: '.jpg, .jpeg, and .png files are accepted.' }
-  //   )
-  //   .refine((files) => files?.[0]?.size >= 5000000, {
-  //     message: `Max file size is 5MB.`,
-  //   }),
-  image: z.any(),
-  color: z.string(),
-  size: z.string(),
-  quantityInStock: z.union([
-    z.number().min(1, { message: 'must be greater than zero' }),
-    z.string().min(1, { message: 'must be greater than zero' }),
-  ]),
-  isDiscount: z.string().min(1, { message: 'select an option' }),
-  discountPercentage: z.union([
-    z.number().min(1, { message: 'must be greater than or equal to zero' }),
-    z.string().min(1, { message: 'must be greater than or equal to zero' }),
-  ]),
-  shippingFee: z.union([
-    z.number().min(0, { message: 'must be greater than or equal to zero' }),
-    z.string().min(0, { message: 'must be greater than or equal to zero' }),
-  ]),
+  image: z
+    .any()
+    .refine((files) => files?.length >= 1, { message: 'Image is required.' })
+    .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, {
+      message: `Max file size is ${MAX_FILE_SIZE / 1024 / 1024}MB.`,
+    }),
+  color: z.string().optional(),
+  size: z.string().optional(),
+  quantityInStock: z.coerce
+    .number()
+    .min(1, { message: 'Must be greater than zero' }),
+  isDiscount: z.string().min(1, { message: 'Select an option' }),
+  discountPercentage: z.coerce
+    .number()
+    .min(1, { message: 'Must be greater than or equal to zero' }),
+  shippingFee: z.coerce
+    .number()
+    .min(1, { message: 'Must be greater than or equal to zero' }),
 });
 
 const CreateProductForm = () => {
+  const [preview, setPreview] = useState<string | null>(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -90,7 +87,24 @@ const CreateProductForm = () => {
     // ✅ This will be type-safe and validated.
     console.log(values);
     form.reset();
+    setPreview(null);
   }
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      // console.log(preview);
+    } else {
+      setPreview(null);
+    }
+  };
+
+  const fileRef = form.register('image');
 
   return (
     <div className='mt-8'>
@@ -153,7 +167,9 @@ const CreateProductForm = () => {
             name='mainCategory'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Category</FormLabel>
+                <FormLabel>
+                  Category <span className='text-red-500'>*</span>
+                </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -179,7 +195,9 @@ const CreateProductForm = () => {
               name='subCategory'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Sub Category</FormLabel>
+                  <FormLabel>
+                    Sub Category <span className='text-red-500'>*</span>
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -204,20 +222,59 @@ const CreateProductForm = () => {
               )}
             />
           )}
+
           <FormField
             control={form.control}
             name='image'
-            render={({ field }) => (
+            render={({}) => (
               <FormItem>
                 <FormLabel>
                   Product Image <span className='text-red-500'>*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type='file'
-                    {...field}
-                    className='bg-white flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 file:appearance-none'
-                  />
+                  <>
+                    <div
+                      className={cn(
+                        'relative h-56 w-full bg-black/20 rounded-xl flex items-center justify-center md:w-1/2 md:h-72'
+                      )}
+                    >
+                      <aside className='relative z-20'>
+                        <ImagePlus
+                          color='hsl(var(--primary))'
+                          size={50}
+                          strokeWidth={1}
+                        />
+                      </aside>
+                      {preview && (
+                        <aside className='absolute w-full h-full rounded-[inherit]'>
+                          <Image
+                            src={preview}
+                            alt='Uploaded Image by user'
+                            width={1000}
+                            height={1000}
+                            className='w-full h-full rounded-[inherit]'
+                          />
+                          <div className='absolute w-full h-full left-0 top-0 bg-black/50 rounded-[inherit]'></div>
+                        </aside>
+                      )}
+                      <Input
+                        type='file'
+                        accept='image/*'
+                        // {...field}
+                        {...fileRef}
+                        className='bg-white opacity-0 absolute z-30 w-full h-full cursor-pointer'
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                    {preview && (
+                      <Button
+                        variant='destructive'
+                        onClick={() => setPreview(null)}
+                      >
+                        remove
+                      </Button>
+                    )}
+                  </>
                 </FormControl>
                 <FormMessage />
               </FormItem>
